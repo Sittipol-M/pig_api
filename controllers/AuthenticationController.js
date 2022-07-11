@@ -161,13 +161,6 @@ exports.OwnerRegister = async (req, res) => {
       return sendResponse(res, false, "User is existed", "UserExisted", null);
     }
 
-    //initial CompanyUser mongoose object
-    const CompanyUser = await companyUser(registerCompany);
-    const foundCompanyOwner = await CompanyUser.findOne({ position: "Owner" });
-    if (foundCompanyOwner) {
-      return sendResponse(res, false, "Can not create owner", "OwnerExisted", null);
-    }
-
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(registerPassword, salt);
