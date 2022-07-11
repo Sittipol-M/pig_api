@@ -67,6 +67,7 @@ exports.editCompanyUser = async (req, res) => {
   const editName = requestBody.name; //for edit company user's name
   const editSurname = requestBody.surname; //for edit company user's surname
   const editPosition = requestBody.position; //for edit company user's position
+  const editSex = requestBody.sex; //for edit company user's sex
   try {
     //check access
     if (!req.access) {
@@ -98,6 +99,8 @@ exports.editCompanyUser = async (req, res) => {
     editSurname ? (foundCompanyUser.surname = editSurname) : null;
     //edit company user 's position
     editPosition ? (foundCompanyUser.position = editPosition) : null;
+    //edit company user's sex
+    editSex ? (foundCompanyUser.sex = editSex) : null;
     if (editPosition === "Admin") {
       //add own farm permission to company user
       //initial farm mongoose object
