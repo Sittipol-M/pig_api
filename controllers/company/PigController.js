@@ -114,7 +114,7 @@ exports.getPigs = async (req, res) => {
     const FemalePig = await femalePig(selectedCompany);
 
     //find Pigs
-    let foundPigs = null;
+    let foundPigs = [];
     const filter = { farm_id: selectedFarmId };
     foundPigs = foundPigs.concat(await MalePig.find(filter, { __v: 0 }));
     foundPigs = foundPigs.concat(await FemalePig.find(filter, { __v: 0 }));
@@ -459,7 +459,7 @@ exports.editPigVaccinations = async (req, res) => {
   try {
     //check access
     if (!req.access) {
-      return sendResponse(res, false, "User does not have permission", "AccessDenied",null);
+      return sendResponse(res, false, "User does not have permission", "AccessDenied", null);
     }
 
     //validation
@@ -617,7 +617,7 @@ exports.getBreeds = async (req, res) => {
     }
     //check if pig breeds not found
     if (foundPig.breeds.length === 0) {
-      return sendResponse(res, false, "Pig breeds is not found", "PigBreedsNotFound",null);
+      return sendResponse(res, false, "Pig breeds is not found", "PigBreedsNotFound", null);
     }
     return sendResponse(res, true, "Pig breeds is found", null, foundPig.breeds);
   } catch (error) {
