@@ -56,6 +56,11 @@ exports.editCompanyUserFarmPermission = async (req, res) => {
       return sendResponse(res, false, "Company user was not found", "CompanyUserNotFound", null);
     }
 
+    //check if company user does not have permisssions
+    if (foundCompanyUser.farm_permissions.length === 0) {
+      return sendResponse(res, true, "Company user farm permissions was not found", "FarmPermissionsNotFound", null);
+    }
+
     // edit farm permission
     for (let i = 0; i < foundCompanyUser.farm_permissions.length; i++) {
       if (foundCompanyUser.farm_permissions[i].farm_id.toString() === selectedFarmId.toString()) {

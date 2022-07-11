@@ -118,7 +118,7 @@ exports.getPigs = async (req, res) => {
     const filter = { farm_id: selectedFarmId };
     foundPigs = foundPigs.concat(await MalePig.find(filter, { __v: 0 }));
     foundPigs = foundPigs.concat(await FemalePig.find(filter, { __v: 0 }));
-    if (foundPigs.length === 0) {
+    if (foundPigs.length === 0 || foundPigs) {
       return sendResponse(res, false, "Pigs was not found", "PigsNotFound", null);
     }
     return sendResponse(res, true, "Pigs was found", null, foundPigs);
