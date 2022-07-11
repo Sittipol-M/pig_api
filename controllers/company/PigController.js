@@ -385,7 +385,7 @@ exports.deletePigVaccinations = async (req, res) => {
     const MalePig = await malePig(selectedCompanyName);
 
     //find pig
-    let foundPig = null;
+    let foundPig = {};
 
     const pigFilter = { rfid_code: selectedPigRfidCode, farm_id: selectedFarmId };
     !foundPig ? (foundPig = await FemalePig.findOne(pigFilter)) : null;
