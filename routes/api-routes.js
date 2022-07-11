@@ -91,7 +91,7 @@ router
 router
   .route("/companies/:company_name/farms/:farm_id/pigs/:rfid_code/vaccinations/:vaccination_id")
   .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.getPigVaccination)
-  .patch(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.editPigVaccinations)
+  .patch(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.editPigVaccination)
   .delete(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.deletePigVaccination);
 
 //unit vaccination

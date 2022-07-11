@@ -448,7 +448,7 @@ exports.getPigVaccination = async (req, res) => {
   }
 };
 
-exports.editPigVaccinations = async (req, res) => {
+exports.editPigVaccination = async (req, res) => {
   const selectedCompanyName = req.params.company_name; //for use pig database
   const selectedFarmId = req.params.farm_id; //for find pig
   const selectedPigRfidCode = req.params.rfid_code; //for find pig
@@ -556,6 +556,8 @@ exports.deletePigVaccination = async (req, res) => {
     return sendErrorResponse(res, error);
   }
 };
+
+
 
 exports.newPigsVaccinationUnit = async (req, res) => {
   const selectedCompanyName = req.params.company_name;
