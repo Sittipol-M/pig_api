@@ -145,7 +145,7 @@ exports.OwnerRegister = async (req, res) => {
       name: Joi.string().min(3).max(30).required(),
       surname: Joi.string().min(3).max(30).required(),
       sex: Joi.string().valid("male", "female").required(),
-      company: Joi.string().min(3).max(30).required(),
+      company: Joi.string().min(3).max(30).alphanum().required(),
     });
     const { error } = ownerRegisterSchema.validate(requestBody);
     if (error) {
