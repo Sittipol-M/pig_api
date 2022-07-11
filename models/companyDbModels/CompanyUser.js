@@ -30,6 +30,9 @@ CompanyUserSchema = mongoose.Schema({
   position: {
     type: String,
   },
+  sex:{
+    type:String
+  },
   farm_permissions: [farmPermissionSchema],
 });
 

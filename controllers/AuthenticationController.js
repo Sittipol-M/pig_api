@@ -130,6 +130,7 @@ exports.OwnerRegister = async (req, res) => {
   const registerSurname = requestBody.surname; //for create owner surname
   const registerPosition = "Owner"; //for create new position for new user owner
   const registerCompany = requestBody.company; //for create new owner company
+  const registerSex = requestBody.sex; //for create owner sex
 
   try {
     //check access
@@ -143,6 +144,7 @@ exports.OwnerRegister = async (req, res) => {
       password: Joi.string().min(6).required(),
       name: Joi.string().min(3).max(30).required(),
       surname: Joi.string().min(3).max(30).required(),
+      sex: Joi.string().valid("male", "female").required(),
       company: Joi.string().min(3).max(30).required(),
     });
     const { error } = ownerRegisterSchema.validate(requestBody);
@@ -185,6 +187,7 @@ exports.OwnerRegister = async (req, res) => {
       name: registerName,
       surname: registerSurname,
       position: registerPosition,
+      sex: registerSex,
     });
     const savedCompanyUser = await newCompanyUser.save();
 
@@ -222,7 +225,7 @@ exports.EmployeesRegister = async (req, res) => {
   const registerName = requestBody.name; //for create new employee name
   const registerSurname = requestBody.surname; //for create new employee surname
   const registerPosition = requestBody.position; //for create new employee position
-
+  const registerSex = requestBody.sex; //for create employee sex
   try {
     //check access
     if (!req.access) {
@@ -235,6 +238,7 @@ exports.EmployeesRegister = async (req, res) => {
       password: Joi.string().alphanum().min(6).required(),
       name: Joi.string().min(3).max(30).required(),
       surname: Joi.string().min(3).max(30).required(),
+      sex: Joi.string().valid("male", "female").required(),
       position: Joi.string().valid("Husbandman", "Veterinarian").required(),
     });
     const { error } = userRegisterSchema.validate(requestBody);
@@ -285,6 +289,7 @@ exports.EmployeesRegister = async (req, res) => {
       name: registerName,
       surname: registerSurname,
       position: registerPosition,
+      sex: registerSex,
       farm_permissions: farmsForFarmPermissions,
     });
 
