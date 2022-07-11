@@ -97,7 +97,7 @@ exports.editCompanyUser = async (req, res) => {
     //edit company user's surname
     editSurname ? (foundCompanyUser.surname = editSurname) : null;
     //edit company user 's position
-    this.editCompanyUser ? (foundCompanyUser.position = editPosition) : null;
+    editPosition ? (foundCompanyUser.position = editPosition) : null;
     if (editPosition === "Admin") {
       //add own farm permission to company user
       //initial farm mongoose object
