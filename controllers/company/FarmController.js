@@ -117,6 +117,14 @@ exports.deleteFarms = async (req, res) => {
     } else if (deletedCount > 0) {
       return sendResponse(res, true, deletedCount + " farms was deleted successful", null, null);
     }
+
+    // initial company user
+    const CompanyUser = await companyUser(selectedCompany);
+    const foundCompanyUsers = await CompanyUser.find({});
+    for (let i = 0; i < foundCompanyUsers.length; i++) {
+      foundCompanyUsers[i].farm_permissions = [];
+      await foundCompanyUsers[i].save();
+    }
   } catch (err) {
     return sendErrorResponse(res, err);
   }
@@ -152,7 +160,7 @@ exports.editFarm = async (req, res) => {
     }
 
     //update farm's farm_name
-    editFarmName ? foundFarm.farm_name = editFarmName:null;
+    editFarmName ? (foundFarm.farm_name = editFarmName) : null;
     //save updated farm
     const savedFarm = await foundFarm.save();
     return sendResponse(res, true, "Farm was updated successful", null, savedFarm);
