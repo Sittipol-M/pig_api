@@ -156,7 +156,7 @@ exports.deletePigs = async (req, res) => {
   }
 };
 
-exports.getPigWithRfidCode = async (req, res) => {
+exports.getPig = async (req, res) => {
   const selectedCompany = req.params.company_name; //for use pig database
   const selectedFarmId = req.params.farm_id; //for use to delete pigs
   const selectedPigRfidCode = req.params.rfid_code; //for find pig
@@ -258,7 +258,7 @@ exports.editPig = async (req, res) => {
   }
 };
 
-exports.deletePigWithRfidCode = async (req, res) => {
+exports.deletePig = async (req, res) => {
   const selectedCompany = req.params.company_name; //for use pig database
   const selectedFarmId = req.params.farm_id; //for use to delete pigs
   const selectedPigRfidCode = req.params.rfid_code; //for find pig
@@ -391,11 +391,15 @@ exports.deletePigVaccinations = async (req, res) => {
     !foundPig ? (foundPig = await FemalePig.findOne(pigFilter)) : null;
     !foundPig ? (foundPig = await MalePig.findOne(pigFilter)) : null;
     if (!foundPig) {
-      return sendResponse(res, false, "Pig is not found.", "PigNotFound", null);
+      return sendResponse(res, false, "Pig was not found.", "PigNotFound", null);
+    }
+
+    if (pigVaccination.length === 0) {
+      return sendResponse(res, false, "Pig vaccinations were not found ", "PigVaccinationsNotFound", null);
     }
 
     //set vaccinations array to pig
-    foundPig.vaccinations = null;
+    foundPig.vaccinations = [];
     //save pig
     const savedPig = await foundPig.save();
     return sendResponse(res, true, "Vaccinations was deleted to pig successful.", null, null);
