@@ -114,8 +114,6 @@ exports.deleteFarms = async (req, res) => {
     //if farms is not existed
     if (deletedCount == 0) {
       return sendResponse(res, false, "farms was not found", "FarmsNotFound", null);
-    } else if (deletedCount > 0) {
-      return sendResponse(res, true, deletedCount + " farms was deleted successful", null, null);
     }
 
     // initial company user
@@ -125,6 +123,7 @@ exports.deleteFarms = async (req, res) => {
       foundCompanyUsers[i].farm_permissions = [];
       await foundCompanyUsers[i].save();
     }
+    return sendResponse(res, true, deletedCount + " farms was deleted successful", null, null);
   } catch (err) {
     return sendErrorResponse(res, err);
   }
