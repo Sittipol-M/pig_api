@@ -394,10 +394,6 @@ exports.deletePigVaccinations = async (req, res) => {
       return sendResponse(res, false, "Pig was not found.", "PigNotFound", null);
     }
 
-    if (foundPig.vaccinations.length === 0) {
-      return sendResponse(res, false, "Pig vaccinations were not found ", "PigVaccinationsNotFound", null);
-    }
-
     //set vaccinations array to pig
     foundPig.vaccinations = [];
     //save pig
