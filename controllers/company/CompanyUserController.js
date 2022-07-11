@@ -75,8 +75,8 @@ exports.editCompanyUser = async (req, res) => {
 
     // validate
     const updateCompanyUserSchema = Joi.object({
-      name: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
-      surname: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
+      name: Joi.string().min(3).max(30).required(),
+      surname: Joi.string().min(3).max(30).required(),
       position: Joi.string().valid("Husbandman", "Veterinarian", "Owner").required(),
     });
     const { error } = updateCompanyUserSchema.validate(requestBody);

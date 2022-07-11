@@ -75,7 +75,7 @@ module.exports.employeePermission = employeePermission = async (req, res, next) 
         }
       }
       //check if to get own company user data
-      else if (selectedCompanyUserId === userAuthData.id) {
+      if (selectedCompanyUserId === userAuthData.id) {
         req.access = true;
       }
       return next();
