@@ -122,7 +122,7 @@ exports.deleteFarms = async (req, res) => {
   }
 };
 
-exports.updateFarm = async (req, res) => {
+exports.editFarm = async (req, res) => {
   const selectedCompany = req.params.company_name; //for use company user db
   const selectedFarmId = req.params.farm_id; //for find farm
   const requestBody = req.body;

@@ -43,10 +43,10 @@ router
   .get(checkAuth, adminPermission, companyOwnerPermission, farmController.getFarms)
   .delete(checkAuth, adminPermission, companyOwnerPermission, farmController.deleteFarms);
 
-// //farm
+//farm
 router
   .route("/companies/:company_name/farms/:farm_id")
-  .put(checkAuth, adminPermission, companyOwnerPermission, farmController.updateFarm)
+  .patch(checkAuth, adminPermission, companyOwnerPermission, farmController.editFarm)
   .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, farmController.getFarm)
   .delete(checkAuth, adminPermission, companyOwnerPermission, farmController.deleteFarm);
 

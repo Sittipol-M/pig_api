@@ -149,7 +149,7 @@ exports.deleteCompanyUser = async (req, res) => {
     if (!deletedCompanyUser && !deletedUser) {
       return sendResponse(res, false, "Company User is not found", "ComputerUserNotFound", null);
     }
-    return sendResponse(res, true, "Computer User was deleted succeccful", null, null);
+    return sendResponse(res, true, "Computer User was deleted successful", null, null);
   } catch (error) {
     sendErrorResponse(res, error);
   }
