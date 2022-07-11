@@ -61,7 +61,7 @@ exports.adminRegister = async (req, res) => {
     const filter = { username: registerUsername };
     const foundAdmin = await Admin.findOne(filter);
     if (foundAdmin) {
-      return sendResponse(res, false, "Admin is existed", "AdminExisted", {});
+      return sendResponse(res, false, "Admin is existed", "AdminExisted", null);
     }
 
     //hash password
