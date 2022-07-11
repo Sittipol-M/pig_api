@@ -315,7 +315,7 @@ exports.getPigVaccinations = async (req, res) => {
       const pigVaccination = foundPig.vaccinations;
       //check if vaccinations were not found
       if (pigVaccination.length === 0) {
-        return sendResponse(res, false, "Pig vaccinations were not found ", "PigVaccinationsNotFound", null);
+        return sendResponse(res, false, "Pig vaccinations were not found ", "VaccinationsNotFound", null);
       }
       return sendResponse(res, true, "Pig vaccinations were found", null, foundPig.vaccinations);
     }

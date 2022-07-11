@@ -87,7 +87,7 @@ router
   .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.getPigVaccinations)
   .post(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.newPigVaccination)
   .delete(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.deletePigVaccinations);
-//pig vacciantion
+//pig vaccianation
 router
   .route("/companies/:company_name/farms/:farm_id/pigs/:rfid_code/vaccinations/:vaccination_id")
   .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.getPigVaccination)
