@@ -141,8 +141,8 @@ exports.OwnerRegister = async (req, res) => {
     const ownerRegisterSchema = Joi.object({
       username: Joi.string().alphanum().min(6).required(),
       password: Joi.string().min(6).required(),
-      name: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
-      surname: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
+      name: Joi.string().min(3).max(30).required(),
+      surname: Joi.string().min(3).max(30).required(),
       company: Joi.string().alphanum().required(),
     });
     const { error } = ownerRegisterSchema.validate(requestBody);
@@ -233,8 +233,8 @@ exports.EmployeesRegister = async (req, res) => {
     const userRegisterSchema = Joi.object({
       username: Joi.string().alphanum().min(6).required(),
       password: Joi.string().alphanum().min(6).required(),
-      name: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
-      surname: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
+      name: Joi.string().min(3).max(30).required(),
+      surname: Joi.string().min(3).max(30).required(),
       position: Joi.string().valid("Husbandman", "Veterinarian").required(),
     });
     const { error } = userRegisterSchema.validate(requestBody);
