@@ -206,6 +206,19 @@ exports.deleteFarm = async (req, res) => {
     if (!deletedFarm) {
       return sendResponse(res, false, "Farm was not found", "FarmNotFound", null);
     }
+
+    // initial company user
+    const CompanyUser = await companyUser(selectedCompany);
+    const foundCompanyUsers = await CompanyUser.find({});
+    for (let i = 0; i < foundCompanyUsers.length; i++) {
+      for(let j = 0;i<foundCompanyUsers[i].farm_permissions.length;i++){
+        if(foundCompanyUsers[i].farm_permissions[j].farm_id === selectedFarmId){
+          foundCompanyUsers[i].farm_permissions.splice(i,1);
+        }
+      }
+      await foundCompanyUsers[i].save();
+    }
+
     return sendResponse(res, true, "Farm was deleted successful", null, null);
   } catch (error) {
     return sendErrorResponse(res, error);
