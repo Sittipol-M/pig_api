@@ -79,6 +79,7 @@ exports.editCompanyUser = async (req, res) => {
       name: Joi.string().min(3).max(30),
       surname: Joi.string().min(3).max(30),
       position: Joi.string().valid("Husbandman", "Veterinarian", "Owner"),
+      sex: Joi.string().valid("male", "female"),
     });
     const { error } = updateCompanyUserSchema.validate(requestBody);
     if (error) {
