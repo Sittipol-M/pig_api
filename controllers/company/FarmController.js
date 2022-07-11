@@ -126,7 +126,7 @@ exports.editFarm = async (req, res) => {
   const selectedCompany = req.params.company_name; //for use company user db
   const selectedFarmId = req.params.farm_id; //for find farm
   const requestBody = req.body;
-  const updatefarmName = requestBody.farm_name; //for update farm's farm_name
+  const editFarmName = requestBody.farm_name; //for update farm's farm_name
 
   try {
     //check access
@@ -152,7 +152,7 @@ exports.editFarm = async (req, res) => {
     }
 
     //update farm's farm_name
-    foundFarm.farm_name = updatefarmName;
+    editFarmName ? foundFarm.farm_name = editFarmName:null;
     //save updated farm
     const savedFarm = await foundFarm.save();
     return sendResponse(res, true, "Farm was updated successful", null, savedFarm);
