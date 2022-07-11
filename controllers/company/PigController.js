@@ -118,7 +118,7 @@ exports.getPigs = async (req, res) => {
     const filter = { farm_id: selectedFarmId };
     foundPigs = foundPigs.concat(await MalePig.find(filter, { __v: 0 }));
     foundPigs = foundPigs.concat(await FemalePig.find(filter, { __v: 0 }));
-    if (foundPigs.length === 0) {
+    if (foundPigs.length === 0 ) {
       return sendResponse(res, false, "Pigs was not found", "PigsNotFound", null);
     }
     return sendResponse(res, true, "Pigs was found", null, foundPigs);
@@ -385,7 +385,7 @@ exports.deletePigVaccinations = async (req, res) => {
     const MalePig = await malePig(selectedCompanyName);
 
     //find pig
-    let foundPig = {};
+    let foundPig = null;
 
     const pigFilter = { rfid_code: selectedPigRfidCode, farm_id: selectedFarmId };
     !foundPig ? (foundPig = await FemalePig.findOne(pigFilter)) : null;
