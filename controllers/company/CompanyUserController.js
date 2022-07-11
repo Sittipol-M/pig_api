@@ -112,7 +112,7 @@ exports.editCompanyUser = async (req, res) => {
     }
     //save edit company user
     const savedCompanyUser = await foundCompanyUser.save();
-    return sendResponse(res, false, "Company User was edited", "CompanyUserEdited", savedCompanyUser);
+    return sendResponse(res, false, "Company User was edited", null, savedCompanyUser);
   } catch (error) {
     sendErrorResponse(res, error);
   }
