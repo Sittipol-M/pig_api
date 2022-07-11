@@ -211,9 +211,9 @@ exports.deleteFarm = async (req, res) => {
     const CompanyUser = await companyUser(selectedCompany);
     const foundCompanyUsers = await CompanyUser.find({});
     for (let i = 0; i < foundCompanyUsers.length; i++) {
-      for(let j = 0;i<foundCompanyUsers[i].farm_permissions.length;i++){
-        if(foundCompanyUsers[i].farm_permissions[j].farm_id === selectedFarmId){
-          foundCompanyUsers[i].farm_permissions.splice(i,1);
+      for (let j = 0; i < foundCompanyUsers[i].farm_permissions.length; i++) {
+        if (foundCompanyUsers[i].farm_permissions[j].farm_id === selectedFarmId) {
+          foundCompanyUsers[i].farm_permissions.splice(j, 1);
         }
       }
       await foundCompanyUsers[i].save();
