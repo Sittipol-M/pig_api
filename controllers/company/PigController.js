@@ -118,7 +118,7 @@ exports.getPigs = async (req, res) => {
     const filter = { farm_id: selectedFarmId };
     foundPigs = foundPigs.concat(await MalePig.find(filter, { __v: 0 }));
     foundPigs = foundPigs.concat(await FemalePig.find(filter, { __v: 0 }));
-    if (foundPigs.length === 0 ) {
+    if (foundPigs.length === 0) {
       return sendResponse(res, false, "Pigs was not found", "PigsNotFound", null);
     }
     return sendResponse(res, true, "Pigs was found", null, foundPigs);
@@ -394,7 +394,7 @@ exports.deletePigVaccinations = async (req, res) => {
       return sendResponse(res, false, "Pig was not found.", "PigNotFound", null);
     }
 
-    if (pigVaccination.length === 0) {
+    if (foundPig.vaccinations.length === 0) {
       return sendResponse(res, false, "Pig vaccinations were not found ", "PigVaccinationsNotFound", null);
     }
 
@@ -433,20 +433,20 @@ exports.getPigVaccination = async (req, res) => {
       return sendResponse(res, false, "Pig is not found.", "PigNotFound", null);
     }
 
-    let foundVaccinaton;
+    let foundVaccinatons;
     //find specify vaccination with vaccination id
     for (let i = 0; i < foundPig.vaccinations.length; i++) {
       if (foundPig.vaccinations[i].id === selectedVaccinationId) {
-        foundVaccinaton = foundPig.vaccinations[i];
+        foundVaccinatons = foundPig.vaccinations[i];
         break;
       }
     }
 
-    if (!foundVaccinaton) {
+    if (!foundVaccinatons) {
       return sendResponse(res, false, "Vaccination was not found.", "VaccinationNotFound", null);
     }
 
-    return sendResponse(res, true, "Vaccination was found.", null, foundVaccinaton);
+    return sendResponse(res, true, "Vaccination was found.", null, foundVaccinatons);
   } catch (error) {
     return sendErrorResponse(res, error);
   }
