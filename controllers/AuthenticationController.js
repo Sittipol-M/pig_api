@@ -46,8 +46,8 @@ exports.adminRegister = async (req, res) => {
     const adminRegisterSchema = Joi.object({
       username: Joi.string().alphanum().min(6).required(), //username is string, minimum = 6 letters,only alphabets and numbers
       password: Joi.string().min(6).required(),
-      name: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
-      surname: Joi.string().pattern(new RegExp("[a-zA-Z]$")).required(),
+      name: Joi.string().min(3).max(30).required(),
+      surname: Joi.string().min(3).max(30).required(),
       sex: Joi.string().valid("male", "female").required(),
     });
     const { error } = adminRegisterSchema.validate(registerAdmin);
