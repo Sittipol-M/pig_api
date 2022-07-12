@@ -118,7 +118,7 @@ exports.getPigs = async (req, res) => {
     const filter = { farm_id: selectedFarmId };
     foundPigs = foundPigs.concat(await MalePig.find(filter, { __v: 0 }));
     foundPigs = foundPigs.concat(await FemalePig.find(filter, { __v: 0 }));
-    if (foundPigs.length === 0 ) {
+    if (foundPigs.length === 0) {
       return sendResponse(res, false, "Pigs was not found", "PigsNotFound", null);
     }
     return sendResponse(res, true, "Pigs was found", null, foundPigs);
@@ -557,8 +557,6 @@ exports.deletePigVaccination = async (req, res) => {
   }
 };
 
-
-
 exports.newPigsVaccinationUnit = async (req, res) => {
   const selectedCompanyName = req.params.company_name;
   const selectedUnitCode = req.params.unit_code;
@@ -672,7 +670,7 @@ exports.newBreed = async (req, res) => {
       return sendResponse(res, false, "Pig was not found", "PigNotFound", null);
     }
 
-    requestBody.new_born = null;
+    requestBody.new_born = {};
     foundPig.breeds.push(requestBody);
     const savedPig = await foundPig.save();
     return sendResponse(res, true, "Breed added successful", null, savedPig.breeds);
