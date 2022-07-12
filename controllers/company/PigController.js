@@ -1152,11 +1152,13 @@ exports.editSperm = async (req, res) => {
       return sendResponse(res, false, "Pig sperm not found", "PigSpermNotFound", null);
     }
 
+    let updatedSperm = {};
     let isEditSperm = false;
     for (let i = 0; i < foundPig.sperms.length; i++) {
       if (foundPig.sperms[i].id === selectedSpermId) {
         foundPig.sperms[i].date_collect_sperm = editDateCollectSperm;
         foundPig.sperms[i].companyUser_collect_sperm = editCompanyUserCollectSperm;
+        updatedSperm = foundPig.sperms[i];
         isEditSperm = true;
         break;
       }
@@ -1169,7 +1171,7 @@ exports.editSperm = async (req, res) => {
     //saved foundPig
     const savedEditedSperm = await foundPig.save();
 
-    return sendResponse(res, true, "Pig sperm was edited successful", null, savedEditedSperm.sperms);
+    return sendResponse(res, true, "Pig sperm was edited successful", null, updatedSperm);
   } catch (error) {
     return sendErrorResponse(res, error);
   }
