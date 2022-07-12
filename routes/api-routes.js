@@ -77,7 +77,7 @@ router
 //pig
 router
   .route("/companies/:company_name/farms/:farm_id/pigs/:rfid_code")
-  .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.getPigs)
+  .get(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.getPig)
   .patch(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.editPig)
   .delete(checkAuth, adminPermission, companyOwnerPermission, employeePermission, PigController.deletePig);
 
