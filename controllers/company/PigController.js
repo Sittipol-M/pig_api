@@ -1156,8 +1156,11 @@ exports.editSperm = async (req, res) => {
     let isEditSperm = false;
     for (let i = 0; i < foundPig.sperms.length; i++) {
       if (foundPig.sperms[i].id === selectedSpermId) {
-        foundPig.sperms[i].date_collect_sperm = editDateCollectSperm;
-        foundPig.sperms[i].companyUser_collect_sperm = editCompanyUserCollectSperm;
+        editCompanyUserCollectSperm
+          ? (foundPig.sperms[i].companyUser_collect_sperm = editCompanyUserCollectSperm)
+          : null;
+        editDateCollectSperm ? (foundPig.sperms[i].date_collect_sperm = editDateCollectSperm) : null;
+
         updatedSperm = foundPig.sperms[i];
         isEditSperm = true;
         break;
