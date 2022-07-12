@@ -700,7 +700,7 @@ exports.deleteBreeds = async (req, res) => {
     }
 
     //delete breeds
-    foundPig.breeds = null;
+    foundPig.breeds = [];
     //save pig deleted breeds
     const deletedBreedPig = foundPig.save();
     return sendResponse(res, true, "Pig breed was deleted successful", null, null);
