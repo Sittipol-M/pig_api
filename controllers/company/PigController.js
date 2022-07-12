@@ -921,7 +921,7 @@ exports.editNewBorn = async (req, res) => {
     }
 
     let isEditBreedNewBorn = false;
-    let editNewBorn = null;
+    let editNewBorn = {};
     for (let i = 0; i < foundPig.breeds.length; i++) {
       if (foundPig.breeds[i].id === selectedBreedId) {
         if (foundPig.breeds[i].new_born) {
