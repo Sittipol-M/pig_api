@@ -1052,7 +1052,9 @@ exports.deleteSperms = async (req, res) => {
       return sendResponse(res, false, "Pig not found", "PigNotFound", null);
     }
     //delete sperms pig
-    foundPig.sperms = null;
+    foundPig.sperms = [];
+
+    await foundPig.save();
 
     return sendResponse(res, true, "Pig sperms deleted successful", null, foundPig.sperms);
   } catch (error) {
