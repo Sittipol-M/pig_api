@@ -1105,8 +1105,8 @@ exports.editSperm = async (req, res) => {
   const selectedPigRfidCode = req.params.rfid_code;
   const selectedSpermId = req.params.sperm_id;
   const requestBody = req.body;
-  const selectedDateCollectSperm = requestBody.date_collect_sperm;
-  const selectedCompanyUserCollectSperm = requestBody.companyUser_collect_sperm;
+  const editDateCollectSperm = requestBody.date_collect_sperm;
+  const editCompanyUserCollectSperm = requestBody.companyUser_collect_sperm;
   try {
     if (!req.access) {
       return sendResponse(res, false, "User does not have permission", "AccessDenied", null);
@@ -1126,16 +1126,17 @@ exports.editSperm = async (req, res) => {
     //initial company user mongoose object
     const CompanyUser = await companyUser(selectedCompanyName);
     const foundCompanyUsers = await CompanyUser.find();
-    let isCompanyUserExisted = false;
-    for (let j = 0; j < foundCompanyUsers.length; j++) {
-      if (requestBody.companyUser_collect_sperm === foundCompanyUsers[j].id) {
-        isCompanyUserExisted = true;
-        break;
+    if (editCompanyUserCollectSperm) {
+      let isCompanyUserExisted = false;
+      for (let j = 0; j < foundCompanyUsers.length; j++) {
+        if (requestBody.companyUser_collect_sperm === foundCompanyUsers[j].id) {
+          isCompanyUserExisted = true;
+          break;
+        }
       }
-    }
-
-    if (!isCompanyUserExisted) {
-      return sendResponse(res, false, "Company user collect sperm not found", "CompanyUserNotFound", null);
+      if (!isCompanyUserExisted) {
+        return sendResponse(res, false, "Company user collect sperm not found", "CompanyUserNotFound", null);
+      }
     }
 
     //get sperm from male pig
@@ -1154,8 +1155,8 @@ exports.editSperm = async (req, res) => {
     let isEditSperm = false;
     for (let i = 0; i < foundPig.sperms.length; i++) {
       if (foundPig.sperms[i].id === selectedSpermId) {
-        foundPig.sperms[i].date_collect_sperm = selectedDateCollectSperm;
-        foundPig.sperms[i].companyUser_collect_sperm = selectedCompanyUserCollectSperm;
+        foundPig.sperms[i].date_collect_sperm = editDateCollectSperm;
+        foundPig.sperms[i].companyUser_collect_sperm = editCompanyUserCollectSperm;
         isEditSperm = true;
         break;
       }
