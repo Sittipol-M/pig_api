@@ -3,7 +3,7 @@
 // https://medium.com/@prashantramnyc/authenticate-rest-apis-in-node-js-using-jwt-json-web-tokens-f0e97669aad3
 
 const express = require("express");
-const port = process.env.PORT || 8080;
+
 const dotenv = require("dotenv");
 
 const bodyParser = require("body-parser");
@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 const apiRoutes = require("./routes/api-routes");
 app.use("/api", apiRoutes);
 
+const port = process.env.PORT || 8080;
 app.listen(port, function () {
   console.log("Running on port " + port);
 });
