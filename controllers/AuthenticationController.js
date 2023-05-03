@@ -1,7 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //////////import send response//////////
-const { sendResponse, sendErrorResponse, sendValidationErrorResponse } = require("../sendResponse/sendResponse");
+const {
+  sendResponse,
+  sendErrorResponse,
+  sendValidationErrorResponse,
+} = require("../sendResponse/sendResponse");
 
 //-> validation
 const Joi = require("joi");
@@ -174,6 +178,7 @@ exports.OwnerRegister = async (req, res) => {
     const savedUser = await newUser.save();
 
     //save for company users collection
+    const CompanyUser = companyUser(registerCompany);
     const newCompanyUser = new CompanyUser({
       _id: savedUser.id,
       username: registerUsername,
