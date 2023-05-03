@@ -12,13 +12,16 @@ const { sendErrorResponse } = require("../sendResponse/sendResponse");
 
 module.exports.adminPermission = adminPermission = async (req, res, next) => {
   try {
-    const selectedCompanyName = req.params.company_name;
-    //initial company for if database not existed
-    const Company = await company();
-    const foundCompany = await Company.findOne({ company_name: selectedCompanyName });
-    if (!foundCompany) {
-      return sendResponse(res, false, "Company is not found", "CompanyNotFound", null);
+    if (req.params.company_name) {
+      const selectedCompanyName = req.params.company_name;
+      //initial company for if database not existed
+      const Company = await company();
+      const foundCompany = await Company.findOne({ company_name: selectedCompanyName });
+      if (!foundCompany) {
+        return sendResponse(res, false, "Company is not found", "CompanyNotFound", null);
+      }
     }
+
     const userAuthData = req.userAuthData;
     if (userAuthData.position === "Admin") {
       req.access = true;
